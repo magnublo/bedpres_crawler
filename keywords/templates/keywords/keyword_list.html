@@ -1,0 +1,21 @@
+<h1>Keywords</h1>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Value</th>
+    <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for keyword in object_list %}
+    <tr>
+    <td>{{ keyword.value }}</td>
+    <td>{{ keyword.user_id }}</td>
+    <td><a href="{% url "keyword_delete" keyword.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url "keyword_new" %}">New</a>
