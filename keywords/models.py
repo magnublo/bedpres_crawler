@@ -9,3 +9,10 @@ class Keyword(models.Model):
 
     def __str__(self):
         return self.value
+
+class Cookie(models.Model):
+    value = models.TextField(max_length=200, default='foobar')
+    user = models.ForeignKey(User, models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.value

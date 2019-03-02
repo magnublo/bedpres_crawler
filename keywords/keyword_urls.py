@@ -6,4 +6,7 @@ urlpatterns = [
     path('', views.KeywordList.as_view(), name='keyword_list'),
     path('new', views.KeywordCreate.as_view(), name='keyword_new'),
     path('delete/<int:pk>', views.KeywordDelete.as_view(), name='keyword_delete'),
+
+    path('', views.CookieList.as_view(), name='cookie_list'),
+    path('new', views.CookieCreate.as_view(), name='cookie_new'),
 ]
