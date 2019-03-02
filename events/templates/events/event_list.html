@@ -1,0 +1,20 @@
+<h1>Events</h1>
+
+<table border="1">
+<thead>
+    <tr>
+    <th>Company</th>
+    <th>Date</th>
+    <th>Time</th>
+    </tr>
+</thead>
+<tbody>
+    {% for event in object_list %}
+    <tr>
+    <td>{{ event.company }}</td>
+    <td>{{ event.date }}</td>
+    <td>{{ event.time }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>

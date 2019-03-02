@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from cookie import views
 
 urlpatterns = [
     path('', views.CookieList.as_view(), name='cookie_list'),

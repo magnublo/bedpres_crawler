@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import accounts
+
+from celery.schedules import crontab
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -37,9 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',
+    'accounts',
     'keywords',
+    'cookie',
+    'events',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +64,7 @@ ROOT_URLCONF = 'my_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'accounts/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,3 +134,20 @@ LOGOUT_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+AUTH_USER_MODEL = "accounts.User"
+
+
+CELERY_BROKER_URL = "localhost:6387"
+
+CELERY_BEAT_SCHEDULE = {
+ 'search-for-company-events': {
+       'task': 'find-events',
+        # There are 4 ways we can handle time, read further
+       'schedule': 3600.0,
+    },
+    # Executes every Friday at 4pm
+    'send-notification-on-friday-afternoon': {
+         'task': 'my_app.tasks.send_notification',
+         'schedule': crontab(hour=16, day_of_week=5),
+        },
+}
