@@ -47,19 +47,25 @@
     </tr>
 </thead>
 <tbody>
-    {% for crawl in crawls %}
     <tr>
-    <td>{{ crawl.last_crawl }}</td>
+    <td>{{ last_crawl }}</td>
     </tr>
-    {% endfor %}
 </tbody>
 </table>
     <p><a href="{% url 'run_crawl' %}">Run new crawl</a></p>
 
+    {% if crawl_toggled %}
+        <p><b><font color="green">Periodic crawl is on.</font></b><a href="{% url 'toggle_crawl' %}"> [Toggle]</a></p>
+    {% else %}
+        <p><b><font color="red">Periodic crawl is off.</font></b><a href="{% url 'toggle_crawl' %}"> [Toggle]</a></p>
+    {% endif %}
   <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'password_reset' %}">reset password</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
+  <a href="{% url 'login' %}">Log in</a>
+    <br></br>
+    <p>New user?</p>
+  <a href="{% url 'signup' %}">Sign up</a>
 {% endif %}
 {% endblock %}
