@@ -40,25 +40,6 @@
 </table>
     <a href="{% url "cookie_new" %}">Set cookie</a>
     <br></br>
-    <table border="">
-<thead>
-    <tr>
-    <th>Last run</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-    <td>{{ last_crawl }}</td>
-    </tr>
-</tbody>
-</table>
-    <p><a href="{% url 'run_crawl' %}">Run new crawl</a></p>
-
-    {% if crawl_toggled %}
-        <p><b><font color="green">Periodic crawl is on.</font></b><a href="{% url 'toggle_crawl' %}"> [Toggle]</a></p>
-    {% else %}
-        <p><b><font color="red">Periodic crawl is off.</font></b><a href="{% url 'toggle_crawl' %}"> [Toggle]</a></p>
-    {% endif %}
   <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'password_reset' %}">reset password</a></p>
 {% else %}

@@ -29,6 +29,6 @@ class CookieCreate(CreateView):
         user = User(request.user)
         # check permission
         cookies = Cookie.objects.filter(user=self.request.user)
-        if len(cookies) is not 0:
+        if len(cookies) > 1:
             cookies.delete()
         return super(CookieCreate, self).post(request, *args, **kwargs)

@@ -15,7 +15,7 @@ class EventList(ListView):
         return CompanyEvent.objects.filter(user=self.request.user)
 
 def run_crawl(request):
-    crawler.run()
+    crawler.run(user)
     return HttpResponse()
 
 def toggle_crawl(request):
