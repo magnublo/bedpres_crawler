@@ -1,21 +1,18 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView
-from cookie.models import Cookie
-from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.views.generic import CreateView
 
-class CookieList(ListView):
-    model = Cookie
-    def get_queryset(self):
-        return Cookie.objects.filter(user=self.request.user)
+from cookie.models import Cookie
+
+User = get_user_model()
 
 @method_decorator(login_required, name='dispatch')
 class CookieCreate(CreateView):
     model = Cookie
     fields = ['value']
-    success_url = reverse_lazy('cookie_list')
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form_class):
         form_class.instance.user = self.request.user

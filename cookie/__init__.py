@@ -1,1 +1,1 @@
-default_app_config = 'cookie.apps.AppConfig'
+#default_app_config = 'cookie.apps.AppConfig'

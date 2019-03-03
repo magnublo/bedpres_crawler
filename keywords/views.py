@@ -1,8 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, DeleteView
-from django.contrib.auth import get_user_model
+
 User = get_user_model()
 from keywords.models import Keyword
 
@@ -15,11 +16,11 @@ class KeywordList(ListView):
 class KeywordCreate(CreateView):
     model = Keyword
     fields = ['value']
-    success_url = reverse_lazy('keyword_list')
+    success_url = reverse_lazy('home')
 
 class KeywordDelete(DeleteView):
     model = Keyword
-    success_url = reverse_lazy('keyword_list')
+    success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
         # check for user logged in

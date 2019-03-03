@@ -5,6 +5,57 @@
 {% block content %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
+    <br></br>
+   <table border="">
+<thead>
+    <tr>
+    <th>Keyword</th>
+    </tr>
+</thead>
+<tbody>
+    {% for keyword in keywords %}
+    <tr>
+    <td>{{ keyword.value }}</td>
+    <td><a href="{% url "keyword_delete" keyword.id %}">delete</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+<a href="{% url "keyword_new" %}">New</a>
+    <br></br>
+    <table border="">
+<thead>
+    <tr>
+    <th>Cookie</th>
+    </tr>
+</thead>
+<tbody>
+    {% for cookie in object_list %}
+    <tr>
+    <td>{{ cookie.value }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+    <a href="{% url "cookie_new" %}">Set cookie</a>
+    <br></br>
+    <table border="">
+<thead>
+    <tr>
+    <th>Last run</th>
+    </tr>
+</thead>
+<tbody>
+    {% for crawl in crawls %}
+    <tr>
+    <td>{{ crawl.last_crawl }}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+    <p><a href="{% url 'run_crawl' %}">Run new crawl</a></p>
+
   <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'password_reset' %}">reset password</a></p>
 {% else %}

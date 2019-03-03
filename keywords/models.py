@@ -6,7 +6,7 @@ User = get_user_model()
 
 
 class Keyword(models.Model):
-    value = models.TextField(max_length=200, default='foobar')
+    value = models.TextField(max_length=200)
     user = models.ForeignKey(User, models.CASCADE, default=1)
 
     def __str__(self):
